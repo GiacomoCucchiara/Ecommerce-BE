@@ -8,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.arces.ecommerce.useraddress.UserAddress;
 import com.arces.ecommerce.usercard.UserCard;
+import com.arces.ecommerce.usercategory.UserCategory;
 
 @Entity
 @Table(name = "user")
@@ -22,7 +25,9 @@ public class User {
     private String nickname;
     private String email;
     private String password;
-    private Integer user_category_id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_category_id", nullable = false, updatable = false)
+    private UserCategory category;
     @OneToMany(mappedBy = "user_id")
     private List<UserCard> user_cards;
     @OneToMany(mappedBy = "user_id")
@@ -41,7 +46,9 @@ public class User {
     public User() {
     }
 
-    public User(Long user_id, String nickname, String email, String password, Integer user_category_id,
+    
+  
+    public User(Long user_id, String nickname, String email, String password, UserCategory category,
             List<UserCard> user_cards, List<UserAddress> user_address, String first_name, String last_name,
             String phone, String sex, Date birthday, String business_name, String vat_number, Integer active,
             Timestamp create_date, Timestamp last_activity) {
@@ -49,7 +56,7 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
-        this.user_category_id = user_category_id;
+        this.category = category;
         this.user_cards = user_cards;
         this.user_address = user_address;
         this.first_name = first_name;
@@ -63,6 +70,21 @@ public class User {
         this.create_date = create_date;
         this.last_activity = last_activity;
     }
+
+    
+
+
+    public UserCategory getCategory() {
+        return category;
+    }
+
+
+
+    public void setCategory(UserCategory category) {
+        this.category = category;
+    }
+
+
 
     public List<UserAddress> getUser_address() {
         return this.user_address;
@@ -110,14 +132,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getUser_category_id() {
-        return user_category_id;
-    }
-
-    public void setUser_category_id(Integer user_category_id) {
-        this.user_category_id = user_category_id;
     }
 
     public String getFirst_name() {
