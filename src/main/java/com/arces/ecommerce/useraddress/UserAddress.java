@@ -4,7 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.arces.ecommerce.city.City;
 
 @Entity
 @Table(name = "user_address")
@@ -13,8 +18,11 @@ public class UserAddress {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long user_address_id;
     private Long user_id;
     private String full_name;
-   
-    private Integer city_id;
+    @OneToOne(optional = false)
+    @JoinColumn(
+        name="city_id", unique=true, nullable=false, updatable=false)
+    private City city;
+    // private Integer city_id;
     private String address;
     private Integer postcode;
     private String phone;
@@ -23,17 +31,43 @@ public class UserAddress {
     public UserAddress() {
     }
 
+   
 
-    public UserAddress(Long user_address_id, Long user_id, String full_name, Integer city_id, String address, Integer postcode, String phone, String delivery_instructions) {
+    
+
+
+    public UserAddress(Long user_address_id, Long user_id, String full_name, City city, String address,
+            Integer postcode, String phone, String delivery_instructions) {
         this.user_address_id = user_address_id;
         this.user_id = user_id;
         this.full_name = full_name;
-        this.city_id = city_id;
+        this.city = city;
         this.address = address;
         this.postcode = postcode;
         this.phone = phone;
         this.delivery_instructions = delivery_instructions;
     }
+
+
+
+
+
+
+    public City getCity() {
+        return city;
+    }
+
+
+
+
+
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+
+
 
 
 
@@ -59,14 +93,6 @@ public class UserAddress {
 
     public void setFull_name(String full_name) {
         this.full_name = full_name;
-    }
-
-    public Integer getCity_id() {
-        return this.city_id;
-    }
-
-    public void setCity_id(Integer city_id) {
-        this.city_id = city_id;
     }
 
     public String getAddress() {
@@ -100,6 +126,5 @@ public class UserAddress {
     public void setDelivery_instructions(String delivery_instructions) {
         this.delivery_instructions = delivery_instructions;
     }
-    
-    
+
 }

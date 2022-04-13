@@ -41,7 +41,10 @@ public class User {
     public User() {
     }
 
-    public User(Long user_id, String nickname, String email, String password, Integer user_category_id, List<UserCard> user_cards, List<UserAddress> user_address, String first_name, String last_name, String phone, String sex, Date birthday, String business_name, String vat_number, Integer active, Timestamp create_date, Timestamp last_activity) {
+    public User(Long user_id, String nickname, String email, String password, Integer user_category_id,
+            List<UserCard> user_cards, List<UserAddress> user_address, String first_name, String last_name,
+            String phone, String sex, Date birthday, String business_name, String vat_number, Integer active,
+            Timestamp create_date, Timestamp last_activity) {
         this.user_id = user_id;
         this.nickname = nickname;
         this.email = email;
@@ -69,7 +72,6 @@ public class User {
         this.user_address = user_address;
     }
 
-  
     public List<UserCard> getUser_cards() {
         return user_cards;
     }
