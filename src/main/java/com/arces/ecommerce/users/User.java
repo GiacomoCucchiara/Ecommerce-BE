@@ -41,16 +41,7 @@ public class User {
     public User() {
     }
 
-    public User(Long user_id, String nickname, String email, String password, Integer user_category_id,
-<<<<<<< HEAD
-            List<UserCard> user_cards, List<UserAddress> user_address, String first_name, String last_name,
-            String phone, String sex, Date birthday, String business_name, String vat_number, Integer active,
-            Timestamp create_date, Timestamp last_activity) {
-=======
-            List<UserCard> user_cards, String first_name, String last_name, String phone,
-            String sex, Date birthday, String business_name, String vat_number, Integer active, Timestamp create_date,
-            Timestamp last_activity) {
->>>>>>> 18c689aeae3cdc53b9e4005e721d0b5e4b79e658
+    public User(Long user_id, String nickname, String email, String password, Integer user_category_id, List<UserCard> user_cards, List<UserAddress> user_address, String first_name, String last_name, String phone, String sex, Date birthday, String business_name, String vat_number, Integer active, Timestamp create_date, Timestamp last_activity) {
         this.user_id = user_id;
         this.nickname = nickname;
         this.email = email;
@@ -70,8 +61,6 @@ public class User {
         this.last_activity = last_activity;
     }
 
-<<<<<<< HEAD
-
     public List<UserAddress> getUser_address() {
         return this.user_address;
     }
@@ -80,9 +69,7 @@ public class User {
         this.user_address = user_address;
     }
 
-
-=======
->>>>>>> 18c689aeae3cdc53b9e4005e721d0b5e4b79e658
+  
     public List<UserCard> getUser_cards() {
         return user_cards;
     }

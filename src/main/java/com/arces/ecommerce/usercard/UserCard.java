@@ -21,10 +21,7 @@ public class UserCard {
 
     public UserCard() {
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 18c689aeae3cdc53b9e4005e721d0b5e4b79e658
 
     public UserCard(Long user_card_id, Long user_id, String card_number, String owner_name, Date expiration) {
         this.user_card_id = user_card_id;
@@ -34,17 +31,7 @@ public class UserCard {
         this.expiration = expiration;
     }
 
-<<<<<<< HEAD
-=======
-    public Long getUser_card_id() {
-        return user_card_id;
-    }
 
-    public void setUser_card_id(Long user_card_id) {
-        this.user_card_id = user_card_id;
-    }
-
->>>>>>> 18c689aeae3cdc53b9e4005e721d0b5e4b79e658
     public Long getUser_id() {
         return this.user_id;
     }
@@ -52,9 +39,10 @@ public class UserCard {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
+    
 
-<<<<<<< HEAD
 
+   
     public Long getUser_card_id() {
         return user_card_id;
     }
@@ -63,8 +51,6 @@ public class UserCard {
         this.user_card_id = user_card_id;
     }
 
-=======
->>>>>>> 18c689aeae3cdc53b9e4005e721d0b5e4b79e658
     public String getCard_number() {
         return card_number;
     }
@@ -89,9 +75,4 @@ public class UserCard {
         this.expiration = expiration;
     }
 
-<<<<<<< HEAD
-=======
-   
-
->>>>>>> 18c689aeae3cdc53b9e4005e721d0b5e4b79e658
 }
