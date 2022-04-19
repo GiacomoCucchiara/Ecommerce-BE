@@ -22,7 +22,7 @@ import com.arces.ecommerce.usercategory.UserCategory;
 public class User {
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long user_id;
-    private String nickname;
+    private String username;
     private String email;
     private String password;
     @ManyToOne(optional = false)
@@ -48,12 +48,12 @@ public class User {
 
     
   
-    public User(Long user_id, String nickname, String email, String password, UserCategory category,
+    public User(Long user_id, String username, String email, String password, UserCategory category,
             List<UserCard> user_cards, List<UserAddress> user_address, String first_name, String last_name,
             String phone, String sex, Date birthday, String business_name, String vat_number, Integer active,
             Timestamp create_date, Timestamp last_activity) {
         this.user_id = user_id;
-        this.nickname = nickname;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.category = category;
@@ -110,12 +110,12 @@ public class User {
         this.user_id = user_id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

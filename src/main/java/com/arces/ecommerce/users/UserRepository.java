@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
         nativeQuery=true
     )
     public List<UserCard> getUserCard (@Param("user_id") Integer user_id);
+
+    public User findByUsername(String username);
 }
