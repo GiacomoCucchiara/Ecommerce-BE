@@ -1,5 +1,6 @@
 package com.arces.ecommerce.users;
 
+import java.security.Timestamp;
 // import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
-    
+
     @Autowired
     private UserService service;
     @Autowired
@@ -49,30 +50,43 @@ public class UserController {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
 
-        
     }
 
-
     @PostMapping("/users")
-    public void add(@RequestBody User user) {
+    public ResponseEntity<?> add(@RequestBody User user) {
+        try {
         List<UserCard> user_cards = user.getUser_cards();
         List<UserAddress> user_address = user.getUser_address();
-        service.save(user);
+
         Long user_id = user.getUser_id();
-        if (!user_cards.isEmpty()){
-            for (UserCard userCard : user_cards) {
-                userCard.setUser_id(user_id);
-            }
-            servicecard.saveAll(user_cards);
+        user.setActive(1);
+        if (user.getUser_category_id() == null){
+            user.setUser_category_id(1);
         }
-        if (!user_address.isEmpty()){
-            for (UserAddress userAddress : user_address) {
-                userAddress.setUser_id(user_id);
+        user.setCreate_date(new java.sql.Timestamp(System.currentTimeMillis()));
+        user.setLast_activity(user.getCreate_date());
+        service.save(user);
+
+        if (user_cards != null) {
+            if (!user_cards.isEmpty()) {
+                for (UserCard userCard : user_cards) {
+                    userCard.setUser_id(user_id);
+                }
+                servicecard.saveAll(user_cards);
             }
-            serviceaddress.saveAll(user_address);
         }
-        
-       
+        if (user_address != null) {
+            if (!user_address.isEmpty()) {
+                for (UserAddress userAddress : user_address) {
+                    userAddress.setUser_id(user_id);
+                }
+                serviceaddress.saveAll(user_address);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    } catch (Exception e) {
+        return new ResponseEntity<String>("User/Email alredy used", HttpStatus.FORBIDDEN);
+    }
     }
 
     @DeleteMapping("/users/{user_id}")
@@ -85,46 +99,45 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
     // @PostMapping("/Users")
     // public void addAll(@RequestBody User[] User) {
-        
-    //     for (User p : User){
-    //         service.save(p);
-    //     }
-    
+
+    // for (User p : User){
+    // service.save(p);
+    // }
 
     // }
 
     // @PutMapping("/Users/{User_id}")
-    // public ResponseEntity<User> update(@RequestBody User User, @PathVariable Long User_id) {
-    //     try {
-    //         User User_old = service.get(User_id);
-    //         copyNonNullProperties(User, User_old);
-    //         service.save(User_old);
-    //         return new ResponseEntity<>(HttpStatus.OK);
+    // public ResponseEntity<User> update(@RequestBody User User, @PathVariable Long
+    // User_id) {
+    // try {
+    // User User_old = service.get(User_id);
+    // copyNonNullProperties(User, User_old);
+    // service.save(User_old);
+    // return new ResponseEntity<>(HttpStatus.OK);
 
-    //     } catch (NoSuchElementException e) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
+    // } catch (NoSuchElementException e) {
+    // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    // }
     // }
 
-
     // public static void copyNonNullProperties(Object src, Object target) {
-    //     BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
+    // BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     // }
 
     // public static String[] getNullPropertyNames(Object source) {
-    //     final BeanWrapper src = new BeanWrapperImpl(source);
-    //     java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
+    // final BeanWrapper src = new BeanWrapperImpl(source);
+    // java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
-    //     Set<String> emptyNames = new HashSet<String>();
-    //     for (java.beans.PropertyDescriptor pd : pds) {
-    //         Object srcValue = src.getPropertyValue(pd.getName());
-    //         if (srcValue == null)
-    //             emptyNames.add(pd.getName());
-    //     }
-    //     String[] result = new String[emptyNames.size()];
-    //     return emptyNames.toArray(result);
+    // Set<String> emptyNames = new HashSet<String>();
+    // for (java.beans.PropertyDescriptor pd : pds) {
+    // Object srcValue = src.getPropertyValue(pd.getName());
+    // if (srcValue == null)
+    // emptyNames.add(pd.getName());
+    // }
+    // String[] result = new String[emptyNames.size()];
+    // return emptyNames.toArray(result);
     // }
 }
