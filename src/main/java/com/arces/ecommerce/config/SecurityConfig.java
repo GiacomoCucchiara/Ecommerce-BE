@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -36,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // @Bean
     // public PasswordEncoder passwordEncoder() {
-    //     return NoOpPasswordEncoder.getInstance();
+    // return NoOpPasswordEncoder.getInstance();
     // }
 
     @Bean
@@ -54,9 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/products").permitAll()
+                .antMatchers(HttpMethod.GET, "/products").permitAll()
                 .and().authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/users").permitAll()
+                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger-resources/**", "/swagger-ui/**",
+                "/webjars/**", "/api-docs/**").permitAll()
+                .and().authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .and().authorizeRequests().antMatchers("/authenticate")
                 .permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()
@@ -64,4 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
+    
 }
