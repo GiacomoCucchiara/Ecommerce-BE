@@ -17,8 +17,6 @@ public class UserCategory {
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer user_category_id;
     private String category;
-    @OneToMany(mappedBy = "user_category_id")
-    private List<User> user;
     
     public UserCategory() {
     }

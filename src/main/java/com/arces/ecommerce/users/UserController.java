@@ -9,6 +9,8 @@ import com.arces.ecommerce.useraddress.UserAddress;
 import com.arces.ecommerce.useraddress.UserAddressService;
 import com.arces.ecommerce.usercard.UserCard;
 import com.arces.ecommerce.usercard.UserCardService;
+import com.arces.ecommerce.usercategory.UserCategory;
+import com.arces.ecommerce.usercategory.UserCategoryService;
 
 // import org.springframework.beans.BeanUtils;
 // import org.springframework.beans.BeanWrapper;
@@ -33,6 +35,8 @@ public class UserController {
     private UserCardService servicecard;
     @Autowired
     private UserAddressService serviceaddress;
+    @Autowired
+    private UserCategoryService servicecategory;
 
     @GetMapping("/users")
     public List<User> list() {
@@ -56,15 +60,21 @@ public class UserController {
         try {
         List<UserCard> user_cards = user.getUser_cards();
         List<UserAddress> user_address = user.getUser_address();
+        UserCategory user_category = user.getCategory();
 
-        Long user_id = user.getUser_id();
         user.setActive(1);
-        if (user.getUser_category_id() == null){
-            user.setUser_category_id(1);
-        }
+        // if (user.getUser_category_id() == null){
+        //     user.setUser_category_id(1);
+        // }
         user.setCreate_date(new java.sql.Timestamp(System.currentTimeMillis()));
         user.setLast_activity(user.getCreate_date());
+        if (user_category == null) {
+            user.setCategory(new UserCategory(1, "Customer"));
+        }
         service.save(user);
+        Long user_id = user.getUser_id();
+        
+        
 
         if (user_cards != null) {
             if (!user_cards.isEmpty()) {
