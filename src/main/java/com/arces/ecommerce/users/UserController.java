@@ -94,7 +94,7 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     } catch (Exception e) {
-        return new ResponseEntity<String>("User/Email alredy used", HttpStatus.FORBIDDEN);
+        return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
     }
     }
 
