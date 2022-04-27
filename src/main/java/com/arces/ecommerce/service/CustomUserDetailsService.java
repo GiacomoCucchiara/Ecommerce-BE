@@ -1,6 +1,8 @@
-package com.arces.ecommerce.users;
+package com.arces.ecommerce.service;
 
 import java.util.ArrayList;
+
+import com.arces.ecommerce.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -19,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        com.arces.ecommerce.users.User user = userRepo.findByUsername(username);
+        com.arces.ecommerce.entity.User user = userRepo.findByUsername(username);
         
         return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }

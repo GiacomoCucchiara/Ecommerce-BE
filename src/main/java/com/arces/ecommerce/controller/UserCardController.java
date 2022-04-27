@@ -1,8 +1,11 @@
-package com.arces.ecommerce.useraddress;
+package com.arces.ecommerce.controller;
 // import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 // import java.util.Set;
+
+import com.arces.ecommerce.entity.UserCard;
+import com.arces.ecommerce.service.UserCardService;
 
 // import org.springframework.beans.BeanUtils;
 // import org.springframework.beans.BeanWrapper;
@@ -19,40 +22,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserAddressController {
+public class UserCardController {
     
     @Autowired
-    private UserAddressService service;
+    private UserCardService service;
 
-    @GetMapping("/usersaddress")
-    public List<UserAddress> list() {
+    @GetMapping("/userscard")
+    public List<UserCard> list() {
         return service.listAll();
     }
 
-    @GetMapping("/usersaddress/{usersaddress_id}")
-    public ResponseEntity<UserAddress> get(@PathVariable Long usersaddress_id) {
+    @GetMapping("/userscard/{user_card_id}")
+    public ResponseEntity<UserCard> get(@PathVariable Long user_card_id) {
 
         try {
-            UserAddress user_address = service.get(usersaddress_id);
-            return new ResponseEntity<UserAddress>(user_address, HttpStatus.OK);
+            UserCard user_card = service.get(user_card_id);
+            return new ResponseEntity<UserCard>(user_card, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<UserAddress>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<UserCard>(HttpStatus.NOT_FOUND);
         }
 
         
     }
 
 
-    @PostMapping("/usersaddress")
-    public void add(@RequestBody UserAddress user_address) {
-        service.save(user_address);
+    @PostMapping("/userscard")
+    public void add(@RequestBody UserCard user_card) {
+        service.save(user_card);
     }
 
-    @DeleteMapping("/usersaddress/{usersaddress_id}")
-    public ResponseEntity<?> delete(@PathVariable Long usersaddress_id) {
+    @DeleteMapping("/userscard/{user_card_id}")
+    public ResponseEntity<?> delete(@PathVariable Long user_card_id) {
         try {
 
-            service.delete(usersaddress_id);
+            service.delete(user_card_id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

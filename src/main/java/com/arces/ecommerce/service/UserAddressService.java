@@ -1,7 +1,11 @@
-package com.arces.ecommerce.useraddress;
+package com.arces.ecommerce.service;
 
 import java.util.List;
 import javax.transaction.Transactional;
+
+import com.arces.ecommerce.entity.UserAddress;
+import com.arces.ecommerce.repository.UserAddressRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

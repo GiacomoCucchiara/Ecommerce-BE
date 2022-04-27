@@ -1,7 +1,11 @@
-package com.arces.ecommerce.usercard;
+package com.arces.ecommerce.service;
 
 import java.util.List;
 import javax.transaction.Transactional;
+
+import com.arces.ecommerce.entity.UserCard;
+import com.arces.ecommerce.repository.UserCardRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

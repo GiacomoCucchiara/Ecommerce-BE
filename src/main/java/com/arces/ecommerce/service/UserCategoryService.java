@@ -1,8 +1,11 @@
-package com.arces.ecommerce.usercategory;
+package com.arces.ecommerce.service;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
+
+import com.arces.ecommerce.entity.UserCategory;
+import com.arces.ecommerce.repository.UserCategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

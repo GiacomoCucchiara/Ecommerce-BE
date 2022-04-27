@@ -1,4 +1,6 @@
-package com.arces.ecommerce.usercard;
+package com.arces.ecommerce.repository;
+
+import com.arces.ecommerce.entity.UserCard;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

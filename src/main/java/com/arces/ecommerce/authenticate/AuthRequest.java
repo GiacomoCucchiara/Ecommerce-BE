@@ -1,4 +1,4 @@
-package com.arces.ecommerce.users;
+package com.arces.ecommerce.authenticate;
 
 public class AuthRequest {
     

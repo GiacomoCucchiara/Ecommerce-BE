@@ -1,15 +1,10 @@
-package com.arces.ecommerce.usercategory;
-
-import java.util.List;
+package com.arces.ecommerce.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.arces.ecommerce.users.User;
 
 @Entity
 @Table(name = "user_category")

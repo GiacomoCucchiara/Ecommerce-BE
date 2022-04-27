@@ -1,10 +1,9 @@
-package com.arces.ecommerce.users;
+package com.arces.ecommerce.entity;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.arces.ecommerce.useraddress.UserAddress;
-import com.arces.ecommerce.usercard.UserCard;
-import com.arces.ecommerce.usercategory.UserCategory;
 
 @Entity
 @Table(name = "user")

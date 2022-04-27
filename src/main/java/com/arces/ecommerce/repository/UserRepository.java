@@ -1,8 +1,9 @@
-package com.arces.ecommerce.users;
+package com.arces.ecommerce.repository;
 
 import java.util.List;
 
-import com.arces.ecommerce.usercard.UserCard;
+import com.arces.ecommerce.entity.User;
+import com.arces.ecommerce.entity.UserCard;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

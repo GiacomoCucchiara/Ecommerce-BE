@@ -1,8 +1,12 @@
-package com.arces.ecommerce.usercard;
+package com.arces.ecommerce.controller;
+
 // import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 // import java.util.Set;
+
+import com.arces.ecommerce.entity.Product;
+import com.arces.ecommerce.service.ProductService;
 
 // import org.springframework.beans.BeanUtils;
 // import org.springframework.beans.BeanWrapper;
@@ -10,71 +14,91 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserCardController {
+public class ProductController {
     
     @Autowired
-    private UserCardService service;
+    private ProductService service;
 
-    @GetMapping("/userscard")
-    public List<UserCard> list() {
+    @GetMapping("/products")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Product> list() {
         return service.listAll();
     }
 
-    @GetMapping("/userscard/{user_card_id}")
-    public ResponseEntity<UserCard> get(@PathVariable Long user_card_id) {
+    @GetMapping("/products/{product_id}")
+    public ResponseEntity<Product> get(@PathVariable Long product_id) {
 
         try {
-            UserCard user_card = service.get(user_card_id);
-            return new ResponseEntity<UserCard>(user_card, HttpStatus.OK);
+            Product product = service.get(product_id);
+            return new ResponseEntity<Product>(product, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<UserCard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+            }
+
         }
+    // .../search/?title=
+    // .../search/?category=
+    // .../search/?description=
+    // .../search/?all= (title or category or description)
+    
+    // Ricerca per titolo
+    @GetMapping("/products/")
+    public ResponseEntity<List<Product>> getProductsByTitle(@RequestParam String title) {
 
-        
+        List<Product> response;
+        response = service.getProductsByTitle(title);
+        if (response.isEmpty()){
+            return new ResponseEntity<List<Product>>(response,HttpStatus.NOT_FOUND);
+
+        }
+        return new ResponseEntity<List<Product>>(response, HttpStatus.OK);
+     
+    }
+    
+    @PostMapping("/products")
+    public void add(@RequestBody Product product) {
+        service.save(product);
     }
 
-
-    @PostMapping("/userscard")
-    public void add(@RequestBody UserCard user_card) {
-        service.save(user_card);
-    }
-
-    @DeleteMapping("/userscard/{user_card_id}")
-    public ResponseEntity<?> delete(@PathVariable Long user_card_id) {
+    @DeleteMapping("/products/{product_id}")
+    public ResponseEntity<?> delete(@PathVariable Long product_id) {
         try {
 
-            service.delete(user_card_id);
+            service.delete(product_id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     
-    // @PostMapping("/Users")
-    // public void addAll(@RequestBody User[] User) {
+    // @PostMapping("/products")
+    // public void addAll(@RequestBody Product[] Product) {
         
-    //     for (User p : User){
+    //     for (Product p : Product){
     //         service.save(p);
     //     }
     
 
     // }
 
-    // @PutMapping("/Users/{User_id}")
-    // public ResponseEntity<User> update(@RequestBody User User, @PathVariable Long User_id) {
+    // @PutMapping("/products/{product_id}")
+    // public ResponseEntity<Product> update(@RequestBody Product product, @PathVariable Long product_id) {
     //     try {
-    //         User User_old = service.get(User_id);
-    //         copyNonNullProperties(User, User_old);
-    //         service.save(User_old);
+    //         Product product_old = service.get(product_id);
+    //         copyNonNullProperties(product, product_old);
+    //         service.save(product_old);
     //         return new ResponseEntity<>(HttpStatus.OK);
 
     //     } catch (NoSuchElementException e) {

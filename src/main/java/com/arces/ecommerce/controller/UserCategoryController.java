@@ -1,7 +1,10 @@
-package com.arces.ecommerce.usercategory;
+package com.arces.ecommerce.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import com.arces.ecommerce.entity.UserCategory;
+import com.arces.ecommerce.service.UserCategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

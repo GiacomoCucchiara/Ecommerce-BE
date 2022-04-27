@@ -1,7 +1,7 @@
 package com.arces.ecommerce.config;
 
 import com.arces.ecommerce.filter.JwtFilter;
-import com.arces.ecommerce.users.CustomUserDetailsService;
+import com.arces.ecommerce.service.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

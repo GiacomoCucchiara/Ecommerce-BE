@@ -1,4 +1,4 @@
-package com.arces.ecommerce.products;
+package com.arces.ecommerce.entity;
 
 import java.sql.Timestamp;
 

@@ -1,5 +1,6 @@
-package com.arces.ecommerce.users;
+package com.arces.ecommerce.controller;
 
+import com.arces.ecommerce.authenticate.AuthRequest;
 import com.arces.ecommerce.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;

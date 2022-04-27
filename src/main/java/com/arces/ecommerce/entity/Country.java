@@ -1,4 +1,4 @@
-package com.arces.ecommerce.country;
+package com.arces.ecommerce.entity;
 
 
 import javax.persistence.Column;

@@ -1,4 +1,6 @@
-package com.arces.ecommerce.usercategory;
+package com.arces.ecommerce.repository;
+
+import com.arces.ecommerce.entity.UserCategory;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

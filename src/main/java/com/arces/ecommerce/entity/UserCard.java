@@ -1,4 +1,4 @@
-package com.arces.ecommerce.usercard;
+package com.arces.ecommerce.entity;
 
 import java.sql.Date;
 
